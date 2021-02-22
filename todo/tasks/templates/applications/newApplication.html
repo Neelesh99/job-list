@@ -1,0 +1,48 @@
+<!--users/templates/registration/login.html-->
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+<style>
+    .center-column{
+		width:1180px;
+		margin: 20px auto;
+		padding:20px;
+		background-color: #fff;
+		border-radius: 3px;
+	}
+
+    .extraTopMargin{
+        margin-top: 50px;
+    }
+</style>
+
+
+<div class="center-column">
+    <h1>Add new Application: </h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="row extraTopMargin">
+            <div class="col">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="name" name="name" placeholder="JobList">
+              <label for="name">Company Name</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="date" class="form-control" id="open_time" name="open_time">
+              <label for="name">Open Date</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="date" class="form-control" id="close_time" name="close_time">
+              <label for="name">Open Date</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="url" name="url">
+              <label for="name">Enter Link Url</label>
+            </div>
+
+            </div>
+        </div>
+        <input class="btn btn-outline-primary" type="submit" value="Submit">
+    </form>
+</div>
