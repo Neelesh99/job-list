@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import ModelForm
+from django.contrib.auth.models import User
 import datetime
 
 
@@ -23,3 +24,12 @@ class ApplicationForm(forms.ModelForm):
     class Meta:
         model = Application
         fields = ('name', 'open_time', 'close_time', 'url', 'open')
+
+class NewUserForm(forms.ModelForm):
+    username = forms.CharField(max_length=200)
+    email = forms.EmailField(max_length=200)
+    password = forms.CharField(max_length=200)
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')

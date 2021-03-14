@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import datetime
+from django.contrib.auth.models import User
 
 from .models import *
 from .forms import *
@@ -56,7 +57,7 @@ def addApplication(request):
                 userApplications.set_applicationPKs(newPKs)
                 userApplications.save()
             else:
-                return redirect('/login')
+                return redirect('/accounts/login')
             return redirect('/applications')
 
     return render(request, 'applications/newApplication.html')
@@ -88,3 +89,17 @@ def applicationPage(request):
             applications.append(Application.objects.get(id=key))
     context = {'applications': applications}
     return render(request, 'applications/appDashboard.html', context)
+
+def createUserPage(request):
+    if request.method == 'POST':
+        newUser = NewUserForm(request.POST)
+        if newUser.is_valid():
+            user = User.objects.create_user(username=newUser.data['username'],
+                                            email=newUser.data['email'],
+                                            password=newUser.data['password'])
+            userApplication = UsersApplications()
+            userApplication.username = newUser.data['username']
+            userApplication.set_applicationPKs([])
+            userApplication.save()
+            return redirect('/accounts/login')
+    return render(request, 'registration/createUser.html')
